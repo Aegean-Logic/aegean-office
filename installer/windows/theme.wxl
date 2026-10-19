@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Aegean Office Setup's strings (theme.xml, and the messages the standard bootstrapper
+     application shows itself: cancelling, files in use, related bundles). -->
+<WixLocalization Culture="en-us" Language="1033" xmlns="http://wixtoolset.org/schemas/v4/wxl">
+  <String Id="Caption" Value="[WixBundleName] Setup" />
+  <String Id="Title" Value="[WixBundleName]" />
+  <String Id="CheckingForUpdatesLabel" Value="Checking for updates…" />
+  <String Id="UpdateButton" Value="&amp;Update to version [WixStdBAUpdateAvailable]" />
+
+  <String Id="InstallHeader" Value="Install Aegean Office" />
+  <String Id="InstallMessage" Value="GridLogic, WordLogic and SlideLogic, by Aegean Logic, will be installed for everyone who uses this computer." />
+  <String Id="InstallMessageOptions" Value="GridLogic, WordLogic and SlideLogic, by Aegean Logic, will be installed for everyone who uses this computer." />
+  <String Id="InstallVersion" Value="Version [WixBundleVersion]" />
+  <String Id="GridLogicKind" Value="Spreadsheets" />
+  <String Id="WordLogicKind" Value="Documents" />
+  <String Id="SlideLogicKind" Value="Presentations" />
+  <String Id="InstallDesktopShortcuts" Value="Create &amp;desktop shortcuts" />
+  <String Id="InstallLicenseLinkText" Value="" />
+  <String Id="InstallAcceptCheckbox" Value="" />
+  <String Id="InstallOptionsButton" Value="&amp;Options" />
+  <String Id="InstallInstallButton" Value="&amp;Install" />
+  <String Id="InstallCancelButton" Value="Cancel" />
+
+  <String Id="ConfirmCancelMessage" Value="Stop installing Aegean Office?" />
+  <String Id="ExecuteUpgradeRelatedBundleMessage" Value="Earlier version" />
+
+  <String Id="HelpHeader" Value="Setup options" />
+  <String Id="HelpText" Value="/install, /repair, /uninstall: install (the default), repair or remove Aegean Office.&#xA;/layout [folder]: copy the whole Setup to a folder.&#xA;/passive: show progress only, with no questions.&#xA;/quiet: show nothing.&#xA;/norestart: never restart the computer.&#xA;/log file.txt: write the log to this file (by default it goes to %TEMP%).&#xA;DesktopShortcuts=1: create desktop shortcuts." />
+  <String Id="HelpCloseButton" Value="&amp;Close" />
+
+  <String Id="OptionsHeader" Value="Options" />
+  <String Id="OptionsLocationLabel" Value="Install location:" />
+  <String Id="OptionsBrowseButton" Value="&amp;Browse" />
+  <String Id="OptionsOkButton" Value="&amp;OK" />
+  <String Id="OptionsCancelButton" Value="Cancel" />
+
+  <String Id="ProgressHeader" Value="Installing Aegean Office" />
+  <String Id="ProgressLabel" Value="Now:" />
+  <String Id="OverallProgressPackageText" Value="Getting ready…" />
+  <String Id="ProgressCancelButton" Value="Cancel" />
+
+  <String Id="ModifyHeader" Value="Aegean Office is installed" />
+  <String Id="ModifyMessage" Value="Repair puts back anything missing from GridLogic, WordLogic and SlideLogic. Uninstall removes all three." />
+  <String Id="ModifyRepairButton" Value="&amp;Repair" />
+  <String Id="ModifyUninstallButton" Value="&amp;Uninstall" />
+  <String Id="ModifyCancelButton" Value="&amp;Close" />
+
+  <String Id="SuccessHeader" Value="Done" />
+  <String Id="SuccessCacheHeader" Value="Done" />
+  <String Id="SuccessInstallHeader" Value="Aegean Office is installed" />
+  <String Id="SuccessLayoutHeader" Value="Setup is copied" />
+  <String Id="SuccessModifyHeader" Value="Aegean Office is installed" />
+  <String Id="SuccessRepairHeader" Value="Aegean Office is repaired" />
+  <String Id="SuccessUninstallHeader" Value="Aegean Office is uninstalled" />
+  <String Id="SuccessUnsafeUninstallHeader" Value="Aegean Office is uninstalled" />
+  <String Id="SuccessInstallMessage" Value="You'll find GridLogic, WordLogic and SlideLogic in the Start menu. They open Excel, Word and PowerPoint files." />
+  <String Id="SuccessLaunchButton" Value="&amp;Open" />
+  <String Id="SuccessRestartText" Value="Restart the computer to finish." />
+  <String Id="SuccessUninstallRestartText" Value="Restart the computer to finish." />
+  <String Id="SuccessRestartButton" Value="&amp;Restart" />
+  <String Id="SuccessCloseButton" Value="&amp;Close" />
+
+  <String Id="FailureHeader" Value="Setup didn't finish" />
+  <String Id="FailureCacheHeader" Value="Setup didn't finish" />
+  <String Id="FailureInstallHeader" Value="Aegean Office wasn't installed" />
+  <String Id="FailureLayoutHeader" Value="Setup wasn't copied" />
+  <String Id="FailureModifyHeader" Value="Aegean Office wasn't changed" />
+  <String Id="FailureRepairHeader" Value="Aegean Office wasn't repaired" />
+  <String Id="FailureUninstallHeader" Value="Aegean Office wasn't uninstalled" />
+  <String Id="FailureUnsafeUninstallHeader" Value="Aegean Office wasn't uninstalled" />
+  <String Id="FailureHyperlinkLogText" Value="Something went wrong. The &lt;a href=&quot;#&quot;&gt;log file&lt;/a&gt; says what." />
+  <String Id="FailureRestartText" Value="Restart the computer to finish undoing the changes." />
+  <String Id="FailureRestartButton" Value="&amp;Restart" />
+  <String Id="FailureCloseButton" Value="&amp;Close" />
+
+  <String Id="FilesInUseTitle" Value="Close these programs" />
+  <String Id="FilesInUseLabel" Value="These programs are using files Setup needs to change:" />
+  <String Id="FilesInUseNetfxCloseRadioButton" Value="Close them, then &amp;continue" />
+  <String Id="FilesInUseCloseRadioButton" Value="Close them, then &amp;continue" />
+  <String Id="FilesInUseDontCloseRadioButton" Value="&amp;Leave them open (a restart may be needed)" />
+  <String Id="FilesInUseRetryButton" Value="&amp;Retry" />
+  <String Id="FilesInUseIgnoreButton" Value="&amp;Ignore" />
+  <String Id="FilesInUseExitButton" Value="E&amp;xit" />
+</WixLocalization>

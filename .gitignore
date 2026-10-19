@@ -3,3 +3,6 @@ _backup/
 gridcraft-protocol/
 wordcraft-protocol/
 deckcraft-collab/
+
+# Built installers (installer/windows/build.ps1).
+dist/

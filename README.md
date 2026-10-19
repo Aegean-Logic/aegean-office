@@ -126,6 +126,15 @@ their graphics, and saving the file deleted them. Now:
 
 ---
 
+## Install on Windows
+
+**Aegean Office Setup** installs GridLogic, WordLogic and SlideLogic in one go: one administrator
+prompt, a choice of desktop shortcuts, and one entry in Installed apps that repairs or removes all
+three. Build it with `pwsh installer/windows/build.ps1`; see
+[installer/windows/README.md](installer/windows/README.md). Each app also has its own Setup.
+
+---
+
 ## This repository
 
 Aegean Office ties the six repositories together as git submodules. The folders keep the
