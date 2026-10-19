@@ -128,9 +128,18 @@ their graphics, and saving the file deleted them. Now:
 
 ## Install on Windows
 
+<p align="center">
+  <a href="https://github.com/Aegean-Logic/aegean-office/releases/latest"><b>⬇ Download Aegean Office Setup for Windows (64-bit)</b></a>
+</p>
+
 **Aegean Office Setup** installs GridLogic, WordLogic and SlideLogic in one go: one administrator
 prompt, a choice of desktop shortcuts, and one entry in Installed apps that repairs or removes all
-three. Build it with `pwsh installer/windows/build.ps1`; see
+three. Download `AegeanOffice-…-windows-x64-setup.exe` from the latest release and run it.
+
+The Setup isn't code-signed yet, so Windows SmartScreen may say it "protected your PC": choose
+**More info**, then **Run anyway**. Each release lists the file's SHA-256 checksum.
+
+To build it yourself: `pwsh installer/windows/build.ps1`; see
 [installer/windows/README.md](installer/windows/README.md). Each app also has its own Setup.
 
 ---
