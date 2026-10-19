@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" font-family="Segoe UI, Helvetica Neue, Helvetica, Arial, sans-serif">
+  <title>Aegean Office and Nextcloud: the browser editors and the desktop apps share one Nextcloud</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#12718C"/>
+    </marker>
+  </defs>
+  <rect width="960" height="460" rx="18" fill="#F4F2EC"/>
+  <text x="40" y="54" font-size="24" font-weight="700" fill="#0A2A3B">Like OneDrive, on your own Nextcloud</text>
+  <text x="40" y="82" font-size="15" fill="#3B5866">Open, share and edit together, from the browser or the desktop apps, with your files on your server.</text>
+
+  <!-- Browser -->
+  <rect x="40" y="112" width="250" height="196" rx="14" fill="#FFFFFF" stroke="#C9D6DB"/>
+  <rect x="40" y="112" width="250" height="44" rx="14" fill="#12718C"/>
+  <rect x="40" y="140" width="250" height="16" fill="#12718C"/>
+  <text x="62" y="141" font-size="17" font-weight="700" fill="#F4F2EC">In the browser</text>
+  <g font-size="14" fill="#0A2A3B">
+    <text x="62" y="186">Open from Nextcloud Files</text>
+    <text x="62" y="214">GridLogic, WordLogic and</text>
+    <text x="62" y="232">SlideLogic editors in a tab</text>
+    <text x="62" y="260">Share links: guests edit</text>
+    <text x="62" y="278">or view, no account needed</text>
+  </g>
+
+  <!-- Nextcloud -->
+  <rect x="355" y="112" width="250" height="196" rx="14" fill="#0A2A3B"/>
+  <text x="377" y="141" font-size="17" font-weight="700" fill="#F4F2EC">Your Nextcloud</text>
+  <rect x="377" y="152" width="44" height="4" rx="2" fill="#2FC6C0"/>
+  <g font-size="14" fill="#F4F2EC">
+    <text x="377" y="186">Files, versions, permissions</text>
+    <text x="377" y="214">People, groups and links</text>
+    <text x="377" y="232">with password and expiry</text>
+    <text x="377" y="260">Co-editing sessions: every</text>
+    <text x="377" y="278">edit in order, saved back</text>
+  </g>
+
+  <!-- Desktop -->
+  <rect x="670" y="112" width="250" height="196" rx="14" fill="#FFFFFF" stroke="#C9D6DB"/>
+  <rect x="670" y="112" width="250" height="44" rx="14" fill="#12718C"/>
+  <rect x="670" y="140" width="250" height="16" fill="#12718C"/>
+  <text x="692" y="141" font-size="17" font-weight="700" fill="#F4F2EC">On the desktop</text>
+  <g font-size="14" fill="#0A2A3B">
+    <text x="692" y="186">Sign in once (Login Flow)</text>
+    <text x="692" y="214">Open, Save As and Recent</text>
+    <text x="692" y="232">browse Nextcloud</text>
+    <text x="692" y="260">AutoSave back to the server;</text>
+    <text x="692" y="278">Open in Desktop App links</text>
+  </g>
+
+  <!-- Live edits both ways -->
+  <g stroke="#12718C" stroke-width="3" fill="none">
+    <path d="M296 196 H349" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+    <path d="M611 196 H664" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+  </g>
+  <text x="322" y="184" font-size="12" text-anchor="middle" fill="#12718C">live</text>
+  <text x="637" y="184" font-size="12" text-anchor="middle" fill="#12718C">live</text>
+
+  <!-- Presence -->
+  <rect x="40" y="332" width="880" height="96" rx="14" fill="#FFFFFF" stroke="#C9D6DB"/>
+  <g font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+    <circle cx="86" cy="380" r="22" fill="#12718C"/><text x="86" y="385">A</text>
+    <circle cx="118" cy="380" r="22" fill="#E8A33D" stroke="#FFFFFF" stroke-width="3"/><text x="118" y="385">B</text>
+    <circle cx="150" cy="380" r="22" fill="#2FC6C0" stroke="#FFFFFF" stroke-width="3"/><text x="150" y="385">C</text>
+  </g>
+  <text x="192" y="371" font-size="16" font-weight="700" fill="#0A2A3B">Ana, Ben and Chloe are editing</text>
+  <text x="192" y="396" font-size="14" fill="#3B5866">Everyone's selection shows in their colour with their name; changes arrive within about a second.</text>
+  <text x="192" y="416" font-size="14" fill="#3B5866">Undo takes back only your own edits. View-only people follow along.</text>
+</svg>

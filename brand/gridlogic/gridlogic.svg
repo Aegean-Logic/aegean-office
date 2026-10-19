@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- GridLogic app icon, "Sheet trace": a sheet with an ink header row and a sea trace ending
+       in the aqua node, on a marble tile. Original work for this repository, built from the
+       Aegean Logic palette: ink #0A2A3B, sea #12718C, aqua #2FC6C0, marble #F4F2EC.
+       Used from 48 px up; gridcraft-small.svg is the simplified glyph for 32 px and below. -->
+  <rect width="512" height="512" rx="112" fill="#F4F2EC"/>
+  <!-- the sheet and its header row -->
+  <rect x="88" y="104" width="336" height="304" rx="28" fill="#FFFFFF"/>
+  <path d="M88 132 A28 28 0 0 1 116 104 H396 A28 28 0 0 1 424 132 V176 H88 Z" fill="#0A2A3B"/>
+  <!-- grid -->
+  <path d="M172 176 V408 M256 176 V408 M340 176 V408 M88 252 H424 M88 330 H424" fill="none" stroke="#CED4D8" stroke-width="8"/>
+  <rect x="88" y="104" width="336" height="304" rx="28" fill="none" stroke="#0A2A3B" stroke-width="16"/>
+  <!-- the trace and its node -->
+  <polyline points="130,364 214,292 298,320 368,224" fill="none" stroke="#12718C" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="368" cy="224" r="34" fill="#2FC6C0" stroke="#FFFFFF" stroke-width="14"/>
+</svg>

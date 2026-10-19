@@ -1,0 +1,5 @@
+# Local only: history backups and extra worktrees of the app repos.
+_backup/
+gridcraft-protocol/
+wordcraft-protocol/
+deckcraft-collab/

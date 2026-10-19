@@ -1,0 +1,24 @@
+[submodule "gridcraft"]
+	path = gridcraft
+	url = https://github.com/Aegean-Logic/gridlogic.git
+	branch = main
+[submodule "gridcraft-nextcloud"]
+	path = gridcraft-nextcloud
+	url = https://github.com/Aegean-Logic/gridlogic-nextcloud.git
+	branch = main
+[submodule "wordcraft"]
+	path = wordcraft
+	url = https://github.com/Aegean-Logic/wordlogic.git
+	branch = main
+[submodule "wordcraft-nextcloud"]
+	path = wordcraft-nextcloud
+	url = https://github.com/Aegean-Logic/wordlogic-nextcloud.git
+	branch = main
+[submodule "deckcraft"]
+	path = deckcraft
+	url = https://github.com/Aegean-Logic/slidelogic.git
+	branch = main
+[submodule "deckcraft-nextcloud"]
+	path = deckcraft-nextcloud
+	url = https://github.com/Aegean-Logic/slidelogic-nextcloud.git
+	branch = main
