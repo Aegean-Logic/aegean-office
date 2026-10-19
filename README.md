@@ -177,5 +177,7 @@ each Nextcloud app's README covers installing it.
 ## Licences
 
 The apps are MIT OR Apache-2.0, like the projects they are based on. The Nextcloud apps are
-AGPL-3.0, as Nextcloud apps are. The Aegean Logic name and marks are trademarks of Aegean Logic and
+AGPL-3.0, as Nextcloud apps are. Each repository carries its licence files. This repository (the
+installer, docs and this README) is MIT OR Apache-2.0: see [LICENSE-MIT](LICENSE-MIT) and
+[LICENSE-APACHE](LICENSE-APACHE). The Aegean Logic name and marks are trademarks of Aegean Logic and
 are not open source; see [brand/README.md](brand/README.md).
