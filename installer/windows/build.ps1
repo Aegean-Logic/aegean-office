@@ -1,15 +1,17 @@
 <#
 .SYNOPSIS
-  Build Aegean Office Setup: one .exe that installs GridLogic, WordLogic and SlideLogic.
+  Build Aegean Office Setup: one .exe that installs GridLogic, WordLogic, SlideLogic and TeamsLogic.
 
 .DESCRIPTION
   Builds each app's MSI with its own packaging/windows/package.ps1 (unless -SkipApps), then chains
-  the three into a WiX bundle, written to dist/ at the top of Aegean Office:
+  the four into a WiX bundle, written to dist/ at the top of Aegean Office:
     AegeanOffice-<version>-windows-<arch>-setup.exe
 
-  Needs what the apps' packaging needs (Rust, the Windows SDK, WiX v5), plus WiX's bootstrapper
-  extension:
+  Needs what the apps' packaging needs (Rust, the Windows SDK, WiX v5; Node 24 and npm 11 for
+  TeamsLogic), plus WiX's bootstrapper and firewall extensions:
     wix extension add -g WixToolset.BootstrapperApplications.wixext/5.0.2
+    wix extension add -g WixToolset.Firewall.wixext/5.0.2
+  TeamsLogic has no x86 build, so -Arch x86 stops at TeamsLogic.
 
   The version defaults to the build date (2026.10.19), so a newer Setup replaces an older one. The
   bundle isn't signed; a signed release needs `wix burn detach` / `reattach` around signing the
@@ -28,7 +30,7 @@ param(
 $ErrorActionPreference = 'Stop'
 $here = $PSScriptRoot
 $root = (Resolve-Path (Join-Path $here '..\..')).Path
-$apps = [ordered]@{ GridLogic = 'gridcraft'; WordLogic = 'wordcraft'; SlideLogic = 'deckcraft' }
+$apps = [ordered]@{ GridLogic = 'gridcraft'; WordLogic = 'wordcraft'; SlideLogic = 'deckcraft'; TeamsLogic = 'teamslogic' }
 
 $msis = @{}
 foreach ($app in $apps.Keys) {
@@ -60,7 +62,7 @@ Push-Location $here
 try {
   wix build bundle.wxs -arch $Arch -ext WixToolset.BootstrapperApplications.wixext `
     -d "Version=$Version" `
-    -d "GridLogicMsi=$($msis.GridLogic)" -d "WordLogicMsi=$($msis.WordLogic)" -d "SlideLogicMsi=$($msis.SlideLogic)" `
+    -d "GridLogicMsi=$($msis.GridLogic)" -d "WordLogicMsi=$($msis.WordLogic)" -d "SlideLogicMsi=$($msis.SlideLogic)" -d "TeamsLogicMsi=$($msis.TeamsLogic)" `
     -o $out
   if ($LASTEXITCODE -ne 0) { throw "wix build failed with exit code $LASTEXITCODE" }
 } finally { Pop-Location }

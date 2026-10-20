@@ -8,12 +8,13 @@
   <String Id="UpdateButton" Value="&amp;Update to version [WixStdBAUpdateAvailable]" />
 
   <String Id="InstallHeader" Value="Install Aegean Office" />
-  <String Id="InstallMessage" Value="GridLogic, WordLogic and SlideLogic, by Aegean Logic, will be installed for everyone who uses this computer." />
-  <String Id="InstallMessageOptions" Value="GridLogic, WordLogic and SlideLogic, by Aegean Logic, will be installed for everyone who uses this computer." />
+  <String Id="InstallMessage" Value="GridLogic, WordLogic, SlideLogic and TeamsLogic, by Aegean Logic, will be installed for everyone who uses this computer." />
+  <String Id="InstallMessageOptions" Value="GridLogic, WordLogic, SlideLogic and TeamsLogic, by Aegean Logic, will be installed for everyone who uses this computer." />
   <String Id="InstallVersion" Value="Version [WixBundleVersion]" />
   <String Id="GridLogicKind" Value="Spreadsheets" />
   <String Id="WordLogicKind" Value="Documents" />
   <String Id="SlideLogicKind" Value="Presentations" />
+  <String Id="TeamsLogicKind" Value="Chat and calls" />
   <String Id="InstallDesktopShortcuts" Value="Create &amp;desktop shortcuts" />
   <String Id="InstallLicenseLinkText" Value="" />
   <String Id="InstallAcceptCheckbox" Value="" />
@@ -40,7 +41,7 @@
   <String Id="ProgressCancelButton" Value="Cancel" />
 
   <String Id="ModifyHeader" Value="Aegean Office is installed" />
-  <String Id="ModifyMessage" Value="Repair puts back anything missing from GridLogic, WordLogic and SlideLogic. Uninstall removes all three." />
+  <String Id="ModifyMessage" Value="Repair puts back anything missing from GridLogic, WordLogic, SlideLogic and TeamsLogic. Uninstall removes all four." />
   <String Id="ModifyRepairButton" Value="&amp;Repair" />
   <String Id="ModifyUninstallButton" Value="&amp;Uninstall" />
   <String Id="ModifyCancelButton" Value="&amp;Close" />
@@ -53,7 +54,7 @@
   <String Id="SuccessRepairHeader" Value="Aegean Office is repaired" />
   <String Id="SuccessUninstallHeader" Value="Aegean Office is uninstalled" />
   <String Id="SuccessUnsafeUninstallHeader" Value="Aegean Office is uninstalled" />
-  <String Id="SuccessInstallMessage" Value="You'll find GridLogic, WordLogic and SlideLogic in the Start menu. They open Excel, Word and PowerPoint files." />
+  <String Id="SuccessInstallMessage" Value="You'll find all four in the Start menu. GridLogic, WordLogic and SlideLogic open Excel, Word and PowerPoint files." />
   <String Id="SuccessLaunchButton" Value="&amp;Open" />
   <String Id="SuccessRestartText" Value="Restart the computer to finish." />
   <String Id="SuccessUninstallRestartText" Value="Restart the computer to finish." />

@@ -1,7 +1,7 @@
 <#
 .SYNOPSIS
-  Renders Aegean Office Setup's artwork: banner.svg to banner.png, the three app icons to
-  gridlogic.png, wordlogic.png and slidelogic.png, and the Aegean Logic app icon to
+  Renders Aegean Office Setup's artwork: banner.svg to banner.png, the four app icons to
+  gridlogic.png, wordlogic.png, slidelogic.png and teamslogic.png, and the Aegean Logic app icon to
   aegean-office.ico (the Setup program's icon).
 
 .DESCRIPTION
@@ -25,7 +25,7 @@ Render (Join-Path $here 'banner.svg') (Join-Path $here 'banner.png') @()
 Write-Output 'wrote banner.png'
 
 # App icons on the Install page: 48 px controls, drawn at 2x.
-foreach ($app in 'gridlogic', 'wordlogic', 'slidelogic') {
+foreach ($app in 'gridlogic', 'wordlogic', 'slidelogic', 'teamslogic') {
   Render (Join-Path $root "brand\$app\$app.svg") (Join-Path $here "$app.png") @('-w', '96', '-h', '96')
   Write-Output "wrote $app.png"
 }

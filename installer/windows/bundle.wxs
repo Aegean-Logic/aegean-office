@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Aegean Office Setup: one program that installs GridLogic, WordLogic and SlideLogic.
+  Aegean Office Setup: one program that installs GridLogic, WordLogic, SlideLogic and TeamsLogic.
 
-  A WiX Burn bundle chaining the three apps' own MSIs (each app's packaging/windows/package.ps1
-  builds them). It asks for administrator rights once, installs the three in a row, and shows as
-  one entry, Aegean Office, in Installed apps; uninstalling it removes all three. An app that was
+  A WiX Burn bundle chaining the four apps' own MSIs (each app's packaging/windows/package.ps1
+  builds them). It asks for administrator rights once, installs the four in a row, and shows as
+  one entry, Aegean Office, in Installed apps; uninstalling it removes all four. An app that was
   already installed on its own stays when the bundle is uninstalled.
 
   The Create desktop shortcuts box sets DesktopShortcuts, passed to each MSI as DESKTOPSHORTCUT
   (1 or 0). From the command line: AegeanOffice-…-setup.exe /quiet DesktopShortcuts=1.
 
   UpgradeCode is fixed for Aegean Office (generated 2026-10-19): never change it, or a newer
-  Setup won't replace an older one. build.ps1 passes Version and the three MSI paths.
+  Setup won't replace an older one. build.ps1 passes Version and the four MSI paths.
 -->
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
      xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal">
@@ -36,6 +36,7 @@
       <Payload SourceFile="branding\gridlogic.png" Name="gridlogic.png" />
       <Payload SourceFile="branding\wordlogic.png" Name="wordlogic.png" />
       <Payload SourceFile="branding\slidelogic.png" Name="slidelogic.png" />
+      <Payload SourceFile="branding\teamslogic.png" Name="teamslogic.png" />
     </BootstrapperApplication>
 
     <Variable Name="DesktopShortcuts" Type="numeric" Value="0" Persisted="yes" bal:Overridable="yes" />
@@ -48,6 +49,9 @@
         <MsiProperty Name="DESKTOPSHORTCUT" Value="[DesktopShortcuts]" />
       </MsiPackage>
       <MsiPackage Id="SlideLogic" SourceFile="$(var.SlideLogicMsi)">
+        <MsiProperty Name="DESKTOPSHORTCUT" Value="[DesktopShortcuts]" />
+      </MsiPackage>
+      <MsiPackage Id="TeamsLogic" SourceFile="$(var.TeamsLogicMsi)">
         <MsiProperty Name="DESKTOPSHORTCUT" Value="[DesktopShortcuts]" />
       </MsiPackage>
     </Chain>

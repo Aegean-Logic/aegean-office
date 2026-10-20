@@ -29,15 +29,19 @@
             <Label X="24" Y="108" Width="-24" Height="28" FontId="1" DisablePrefix="yes">#(loc.InstallHeader)</Label>
             <Label X="24" Y="140" Width="-24" Height="36" FontId="2" DisablePrefix="yes">#(loc.InstallMessage)</Label>
 
-            <ImageControl X="76" Y="186" Width="48" Height="48" ImageFile="gridlogic.png" />
-            <Label X="20" Y="240" Width="160" Height="18" FontId="3" Center="yes" DisablePrefix="yes">GridLogic</Label>
-            <Label X="20" Y="258" Width="160" Height="18" FontId="4" Center="yes" DisablePrefix="yes">#(loc.GridLogicKind)</Label>
-            <ImageControl X="256" Y="186" Width="48" Height="48" ImageFile="wordlogic.png" />
-            <Label X="200" Y="240" Width="160" Height="18" FontId="3" Center="yes" DisablePrefix="yes">WordLogic</Label>
-            <Label X="200" Y="258" Width="160" Height="18" FontId="4" Center="yes" DisablePrefix="yes">#(loc.WordLogicKind)</Label>
-            <ImageControl X="436" Y="186" Width="48" Height="48" ImageFile="slidelogic.png" />
-            <Label X="380" Y="240" Width="160" Height="18" FontId="3" Center="yes" DisablePrefix="yes">SlideLogic</Label>
-            <Label X="380" Y="258" Width="160" Height="18" FontId="4" Center="yes" DisablePrefix="yes">#(loc.SlideLogicKind)</Label>
+            <!-- Four columns, 130 wide, from X 20. -->
+            <ImageControl X="61" Y="186" Width="48" Height="48" ImageFile="gridlogic.png" />
+            <Label X="20" Y="240" Width="130" Height="18" FontId="3" Center="yes" DisablePrefix="yes">GridLogic</Label>
+            <Label X="20" Y="258" Width="130" Height="18" FontId="4" Center="yes" DisablePrefix="yes">#(loc.GridLogicKind)</Label>
+            <ImageControl X="191" Y="186" Width="48" Height="48" ImageFile="wordlogic.png" />
+            <Label X="150" Y="240" Width="130" Height="18" FontId="3" Center="yes" DisablePrefix="yes">WordLogic</Label>
+            <Label X="150" Y="258" Width="130" Height="18" FontId="4" Center="yes" DisablePrefix="yes">#(loc.WordLogicKind)</Label>
+            <ImageControl X="321" Y="186" Width="48" Height="48" ImageFile="slidelogic.png" />
+            <Label X="280" Y="240" Width="130" Height="18" FontId="3" Center="yes" DisablePrefix="yes">SlideLogic</Label>
+            <Label X="280" Y="258" Width="130" Height="18" FontId="4" Center="yes" DisablePrefix="yes">#(loc.SlideLogicKind)</Label>
+            <ImageControl X="451" Y="186" Width="48" Height="48" ImageFile="teamslogic.png" />
+            <Label X="410" Y="240" Width="130" Height="18" FontId="3" Center="yes" DisablePrefix="yes">TeamsLogic</Label>
+            <Label X="410" Y="258" Width="130" Height="18" FontId="4" Center="yes" DisablePrefix="yes">#(loc.TeamsLogicKind)</Label>
 
             <!-- Named like the bundle variable, so the standard bootstrapper application keeps them in step. -->
             <Checkbox Name="DesktopShortcuts" X="24" Y="296" Width="-24" Height="20" TabStop="yes" FontId="0">#(loc.InstallDesktopShortcuts)</Checkbox>
