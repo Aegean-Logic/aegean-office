@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- TeamsLogic app icon, small glyph for 32 px and below: the "Bubble trace" artwork
+       (teamslogic.svg) with a larger bubble, a heavier frame and trace and a larger node so it
+       holds up at 16 px. Original work; Aegean Logic palette. -->
+  <rect width="512" height="512" rx="112" fill="#F4F2EC"/>
+  <path d="M80 56 H432 A40 40 0 0 1 472 96 V340 A40 40 0 0 1 432 380 H232 L112 468 L136 380 H80 A40 40 0 0 1 40 340 V96 A40 40 0 0 1 80 56 Z" fill="#FFFFFF"/>
+  <path d="M40 96 A40 40 0 0 1 80 56 H432 A40 40 0 0 1 472 96 V128 H40 Z" fill="#0A2A3B"/>
+  <path d="M80 56 H432 A40 40 0 0 1 472 96 V340 A40 40 0 0 1 432 380 H232 L112 468 L136 380 H80 A40 40 0 0 1 40 340 V96 A40 40 0 0 1 80 56 Z" fill="none" stroke="#0A2A3B" stroke-width="32" stroke-linejoin="round"/>
+  <path d="M160 204 H352 M256 204 V316" fill="none" stroke="#12718C" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="352" cy="204" r="40" fill="#2FC6C0" stroke="#FFFFFF" stroke-width="16"/>
+</svg>

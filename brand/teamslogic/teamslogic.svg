@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- TeamsLogic app icon, "Bubble trace": a chat bubble with an ink header band and a sea trace
+       forming a T that ends in the aqua node, on a marble tile. Sibling of GridLogic's
+       "Sheet trace", WordLogic's "W trace" and SlideLogic's "Banded slide". Original work, built
+       from the Aegean Logic palette: ink #0A2A3B, sea #12718C, aqua #2FC6C0, marble #F4F2EC.
+       Used from 48 px up; teamslogic-small.svg is the simplified glyph for 32 px and below. -->
+  <rect width="512" height="512" rx="112" fill="#F4F2EC"/>
+  <!-- the bubble, its tail and its header band -->
+  <path d="M100 88 H412 A28 28 0 0 1 440 116 V332 A28 28 0 0 1 412 360 H220 L132 428 L148 360 H100 A28 28 0 0 1 72 332 V116 A28 28 0 0 1 100 88 Z" fill="#FFFFFF"/>
+  <path d="M72 116 A28 28 0 0 1 100 88 H412 A28 28 0 0 1 440 116 V144 H72 Z" fill="#0A2A3B"/>
+  <path d="M100 88 H412 A28 28 0 0 1 440 116 V332 A28 28 0 0 1 412 360 H220 L132 428 L148 360 H100 A28 28 0 0 1 72 332 V116 A28 28 0 0 1 100 88 Z" fill="none" stroke="#0A2A3B" stroke-width="16" stroke-linejoin="round"/>
+  <!-- the T trace and its node -->
+  <path d="M176 208 H336 M256 208 V308" fill="none" stroke="#12718C" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="336" cy="208" r="32" fill="#2FC6C0" stroke="#FFFFFF" stroke-width="14"/>
+</svg>

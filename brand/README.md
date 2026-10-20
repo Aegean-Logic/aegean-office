@@ -6,6 +6,7 @@
 | `gridlogic/` | GridLogic app icon, "Sheet trace" (copy of `gridcraft/assets/app-icon/gridcraft.svg`) | MIT OR Apache-2.0, as in `gridcraft/assets/app-icon/LICENSE.txt` |
 | `wordlogic/` | WordLogic app icon masters, "W trace" | Aegean Logic trademark, supplied by Aegean Logic (see `wordcraft/docs/brand/LICENSE-brand.txt`) |
 | `slidelogic/` | SlideLogic app icon masters, "Banded slide" | MIT OR Apache-2.0, as in `deckcraft/assets/app-icon/LICENSE.txt` |
+| `teamslogic/` | TeamsLogic app icon masters, "Bubble trace" (copies of `teamslogic/brand/`) | MIT OR Apache-2.0, as in `teamslogic/REUSE.toml` |
 
 The apps carry their own copies of these files; change a master here, then regenerate each app's
-icons with its `packaging/icons.sh`.
+icons with its `packaging/icons.sh` (TeamsLogic: `npm run generate-branding`).
