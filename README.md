@@ -146,8 +146,9 @@ To build it yourself: `pwsh installer/windows/build.ps1`; see
 
 ## This repository
 
-Aegean Office ties the six repositories together as git submodules. The folders keep the
-upstream projects' names, as each app keeps its internal names, so upstream changes merge cheaply.
+Aegean Office ties the seven repositories together as git submodules. The folders of the three
+apps and their Nextcloud apps keep the upstream projects' names, as each app keeps its internal
+names, so upstream changes merge cheaply.
 
 | Folder | Repository | What |
 |---|---|---|
@@ -157,6 +158,7 @@ upstream projects' names, as each app keeps its internal names, so upstream chan
 | `wordcraft-nextcloud/` | [Aegean-Logic/wordlogic-nextcloud](https://github.com/Aegean-Logic/wordlogic-nextcloud) | WordLogic's Nextcloud app |
 | `deckcraft/` | [Aegean-Logic/slidelogic](https://github.com/Aegean-Logic/slidelogic) | SlideLogic, the presentation app |
 | `deckcraft-nextcloud/` | [Aegean-Logic/slidelogic-nextcloud](https://github.com/Aegean-Logic/slidelogic-nextcloud) | SlideLogic's Nextcloud app |
+| `teamslogic/` | [Aegean-Logic/teamslogic](https://github.com/Aegean-Logic/teamslogic) | TeamsLogic, chat, calls and meetings (a fork of Nextcloud Talk Desktop) |
 | `brand/` | this repository | App icon masters and the Aegean Logic marks ([brand/README.md](brand/README.md)) |
 
 ### Getting started
@@ -172,12 +174,13 @@ git submodule update --remote
 ```
 
 Each app builds with Cargo; its README and `AGENTS.md` cover building, running and testing, and
-each Nextcloud app's README covers installing it.
+each Nextcloud app's README covers installing it. TeamsLogic is an Electron app that builds with
+npm; see its README.
 
 ## Licences
 
 The apps are MIT OR Apache-2.0, like the projects they are based on. The Nextcloud apps are
-AGPL-3.0, as Nextcloud apps are. Each repository carries its licence files. This repository (the
+AGPL-3.0, as Nextcloud apps are, and so is TeamsLogic, like Nextcloud Talk Desktop. Each repository carries its licence files. This repository (the
 installer, docs and this README) is MIT OR Apache-2.0: see [LICENSE-MIT](LICENSE-MIT) and
 [LICENSE-APACHE](LICENSE-APACHE). The Aegean Logic name and marks are trademarks of Aegean Logic and
 are not open source; see [brand/README.md](brand/README.md).

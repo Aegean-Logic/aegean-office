@@ -22,3 +22,7 @@
 	path = deckcraft-nextcloud
 	url = https://github.com/Aegean-Logic/slidelogic-nextcloud.git
 	branch = main
+[submodule "teamslogic"]
+	path = teamslogic
+	url = https://github.com/Aegean-Logic/teamslogic.git
+	branch = main
