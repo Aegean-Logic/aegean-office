@@ -16,8 +16,15 @@ pwsh installer/windows/build.ps1
 ```
 
 This builds each app's MSI with its `packaging/windows/package.ps1`, then the bundle, into `dist/`
-at the top of Aegean Office. `-SkipApps` reuses the MSIs already built; `-Version` sets the suite's
-version (the build date by default, so a newer Setup replaces an older one).
+at the top of Aegean Office. `-SkipApps` reuses the MSIs already built; `-Only TeamsLogic` (or any
+of the four, comma-separated) rebuilds just those and reuses the rest, with a warning for any reused
+MSI older than its app's last commit; `-Version` sets the suite's version (the build date by
+default, so a newer Setup replaces an older one).
+
+The Setup installs the desktop apps. Their Nextcloud server apps (`gridcraft-nextcloud`,
+`wordcraft-nextcloud`, `deckcraft-nextcloud`, `teamslogic-nextcloud`) go on the Nextcloud server,
+not in this Setup; TeamsLogic's People, To Do, Teams/Meet links and connected accounts need
+`teamslogic-nextcloud` there.
 
 Needs what the apps' packaging needs (Rust, the Windows SDK and WiX v5; Node 24 and npm 11 for
 TeamsLogic, an Electron app), plus WiX's bootstrapper and firewall extensions (TeamsLogic's MSI adds

@@ -20,12 +20,15 @@
 .EXAMPLE
   pwsh installer/windows/build.ps1
   pwsh installer/windows/build.ps1 -SkipApps            # reuse the MSIs already in each app's dist/release
+  pwsh installer/windows/build.ps1 -Only TeamsLogic     # rebuild TeamsLogic, reuse the others' MSIs
   pwsh installer/windows/build.ps1 -Version 2026.11.1
 #>
 param(
   [ValidateSet('x64', 'x86', 'arm64')] [string] $Arch = 'x64',
   [string] $Version = (Get-Date).ToString('yyyy.M.d'),
-  [switch] $SkipApps
+  [switch] $SkipApps,
+  # Rebuild only these apps' MSIs; the others' are reused
+  [ValidateSet('GridLogic', 'WordLogic', 'SlideLogic', 'TeamsLogic')] [string[]] $Only = @()
 )
 $ErrorActionPreference = 'Stop'
 $here = $PSScriptRoot
@@ -38,7 +41,7 @@ foreach ($app in $apps.Keys) {
   if (-not (Test-Path (Join-Path $dir 'packaging\windows\package.ps1'))) {
     throw "$app isn't checked out at $dir (git submodule update --init)"
   }
-  if (-not $SkipApps) {
+  if (-not $SkipApps -and ($Only.Count -eq 0 -or $Only -contains $app)) {
     Write-Output "==> $app"
     # package.ps1 runs cargo in the current directory: build from inside the app.
     Push-Location $dir
@@ -51,6 +54,11 @@ foreach ($app in $apps.Keys) {
     Sort-Object LastWriteTime -Descending | Select-Object -First 1
   if (-not $msi) { throw "no $Arch MSI for $app in $dir\dist\release (run without -SkipApps)" }
   Write-Output "$app`: $($msi.Name) ($($msi.LastWriteTime))"
+  # A reused MSI older than the app's last commit leaves that commit out of the Setup
+  $committed = [DateTimeOffset]::FromUnixTimeSeconds([long](git -C $dir log -1 --format=%ct)).LocalDateTime
+  if ($msi.LastWriteTime -lt $committed) {
+    Write-Warning "$app`: the MSI predates its last commit ($committed); rebuild it with -Only $app"
+  }
   $msis[$app] = $msi.FullName
 }
 
