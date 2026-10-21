@@ -26,3 +26,7 @@
 	path = teamslogic
 	url = https://github.com/Aegean-Logic/teamslogic.git
 	branch = main
+[submodule "teamslogic-nextcloud"]
+	path = teamslogic-nextcloud
+	url = https://github.com/Aegean-Logic/teamslogic-nextcloud.git
+	branch = main
