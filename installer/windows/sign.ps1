@@ -1,0 +1,122 @@
+<#
+.SYNOPSIS
+  Authenticode-sign files with signtool, using whichever signing material is configured.
+
+.DESCRIPTION
+  Tries, in order:
+    1. A code-signing certificate file:   WINDOWS_CERTIFICATE (base64 .pfx), WINDOWS_CERTIFICATE_PASSWORD
+    2. Azure Trusted Signing:             AZURE_TENANT_ID, AZURE_CLIENT_ID, AZURE_CLIENT_SECRET,
+                                          AZURE_SIGNING_ENDPOINT (e.g. https://eus.codesigning.azure.net),
+                                          AZURE_SIGNING_ACCOUNT, AZURE_CERT_PROFILE
+  With neither, it prints a warning and leaves the files unsigned (exit code 0), so test builds
+  still produce installers.
+
+  This is the one place to adapt when the signing setup changes (an HSM/cloud key, a different
+  timestamp server, ...). Optional overrides: WINDOWS_TIMESTAMP_URL, SIGNTOOL (path to signtool.exe).
+
+  A copy of the apps' packaging/windows/sign.ps1, signing as "Aegean Office Setup" (the name the
+  administrator prompt shows). build.ps1 uses it for the Setup's engine and the Setup itself.
+
+.EXAMPLE
+  pwsh installer/windows/sign.ps1 dist/AegeanOffice-2026.11.6-windows-x64-setup.exe
+#>
+param(
+  [Parameter(Mandatory = $true, ValueFromRemainingArguments = $true)]
+  [string[]] $Files
+)
+$ErrorActionPreference = 'Stop'
+
+function Write-Warn([string] $Message) {
+  if ($env:GITHUB_ACTIONS) { Write-Output "::warning::$Message" } else { Write-Warning $Message }
+}
+
+function Find-SignTool {
+  if ($env:SIGNTOOL) { return $env:SIGNTOOL }
+  $onPath = Get-Command signtool.exe -ErrorAction SilentlyContinue
+  if ($onPath) { return $onPath.Source }
+  $kits = Join-Path ${env:ProgramFiles(x86)} 'Windows Kits\10\bin'
+  $found = Get-ChildItem -Path $kits -Recurse -Filter signtool.exe -ErrorAction SilentlyContinue |
+    Where-Object { $_.FullName -match '\\x64\\signtool\.exe$' } |
+    Sort-Object FullName -Descending | Select-Object -First 1
+  if ($found) { return $found.FullName }
+  return $null
+}
+
+# Azure's signing dlib needs signtool 10.0.22621.755 or later: older ones ignore /dlib and pick a
+# certificate from the local store instead. Fetches Microsoft's current signtool from NuGet.
+function Get-CurrentSignTool([string] $Dir) {
+  $pkg = Join-Path $Dir 'sdk-buildtools.zip'
+  Invoke-WebRequest -Uri 'https://www.nuget.org/api/v2/package/Microsoft.Windows.SDK.BuildTools' -OutFile $pkg
+  Expand-Archive -Path $pkg -DestinationPath (Join-Path $Dir 'sdk-buildtools') -Force
+  $found = Get-ChildItem -Path (Join-Path $Dir 'sdk-buildtools') -Recurse -Filter signtool.exe |
+    Where-Object { $_.FullName -match '\\x64\\signtool\.exe$' } |
+    Sort-Object FullName -Descending | Select-Object -First 1
+  if (-not $found) { throw 'signtool.exe not found in Microsoft.Windows.SDK.BuildTools' }
+  return $found.FullName
+}
+
+function Test-SignToolSupportsDlib([string] $Path) {
+  $version = $null
+  if (-not [version]::TryParse((Get-Item $Path).VersionInfo.ProductVersion, [ref] $version)) { return $false }
+  return $version -ge [version]'10.0.22621.755'
+}
+
+function Invoke-SignTool([string[]] $Arguments) {
+  & $script:SignTool @Arguments
+  if ($LASTEXITCODE -ne 0) { throw "signtool $($Arguments[0]) failed with exit code $LASTEXITCODE" }
+}
+
+$Files = $Files | ForEach-Object { (Resolve-Path $_).Path }
+$haveCert = [bool]$env:WINDOWS_CERTIFICATE
+$azureVars = 'AZURE_TENANT_ID', 'AZURE_CLIENT_ID', 'AZURE_CLIENT_SECRET', 'AZURE_SIGNING_ENDPOINT', 'AZURE_SIGNING_ACCOUNT', 'AZURE_CERT_PROFILE'
+$haveAzure = -not ($azureVars | Where-Object { -not [Environment]::GetEnvironmentVariable($_) })
+
+if (-not $haveCert -and -not $haveAzure) {
+  Write-Warn "Windows signing secrets not set (WINDOWS_CERTIFICATE or AZURE_*): leaving unsigned: $($Files -join ', ')"
+  exit 0
+}
+
+$script:SignTool = Find-SignTool
+$common = @('sign', '/v', '/fd', 'SHA256', '/td', 'SHA256', '/d', 'Aegean Office Setup', '/du', 'https://www.aegeanlogic.co.uk')
+$tmp = Join-Path ([IO.Path]::GetTempPath()) "aegean-office-sign-$PID"
+New-Item -ItemType Directory -Force -Path $tmp | Out-Null
+
+try {
+  if ($haveCert) {
+    if (-not $script:SignTool) { throw 'signtool.exe not found (install the Windows SDK)' }
+    Write-Output "Signing with WINDOWS_CERTIFICATE: $($Files -join ', ')"
+    $pfx = Join-Path $tmp 'cert.pfx'
+    [IO.File]::WriteAllBytes($pfx, [Convert]::FromBase64String($env:WINDOWS_CERTIFICATE))
+    $ts = if ($env:WINDOWS_TIMESTAMP_URL) { $env:WINDOWS_TIMESTAMP_URL } else { 'http://timestamp.digicert.com' }
+    $signArgs = $common + @('/tr', $ts, '/f', $pfx)
+    if ($env:WINDOWS_CERTIFICATE_PASSWORD) { $signArgs += @('/p', $env:WINDOWS_CERTIFICATE_PASSWORD) }
+    Invoke-SignTool ($signArgs + $Files)
+  }
+  else {
+    if (-not $env:SIGNTOOL -and -not ($script:SignTool -and (Test-SignToolSupportsDlib $script:SignTool))) {
+      Write-Output "Installed signtool is missing or too old for Azure signing: fetching Microsoft.Windows.SDK.BuildTools"
+      $script:SignTool = Get-CurrentSignTool $tmp
+    }
+    Write-Output "Signing with Azure Trusted Signing ($env:AZURE_SIGNING_ACCOUNT / $env:AZURE_CERT_PROFILE): $($Files -join ', ')"
+    # The dlib authenticates with DefaultAzureCredential, which reads AZURE_TENANT_ID,
+    # AZURE_CLIENT_ID and AZURE_CLIENT_SECRET from the environment.
+    $pkg = Join-Path $tmp 'trusted-signing.zip'
+    Invoke-WebRequest -Uri 'https://www.nuget.org/api/v2/package/Microsoft.Trusted.Signing.Client' -OutFile $pkg
+    Expand-Archive -Path $pkg -DestinationPath (Join-Path $tmp 'client') -Force
+    $dlib = Get-ChildItem -Path (Join-Path $tmp 'client') -Recurse -Filter Azure.CodeSigning.Dlib.dll |
+      Where-Object { $_.FullName -match '\\x64\\' } | Select-Object -First 1
+    if (-not $dlib) { throw 'Azure.CodeSigning.Dlib.dll not found in Microsoft.Trusted.Signing.Client' }
+    $metadata = Join-Path $tmp 'metadata.json'
+    @{
+      Endpoint               = $env:AZURE_SIGNING_ENDPOINT
+      CodeSigningAccountName = $env:AZURE_SIGNING_ACCOUNT
+      CertificateProfileName = $env:AZURE_CERT_PROFILE
+    } | ConvertTo-Json | Set-Content -Path $metadata -Encoding utf8
+    $ts = if ($env:WINDOWS_TIMESTAMP_URL) { $env:WINDOWS_TIMESTAMP_URL } else { 'http://timestamp.acs.microsoft.com' }
+    Invoke-SignTool ($common + @('/tr', $ts, '/dlib', $dlib.FullName, '/dmdf', $metadata) + $Files)
+  }
+  Invoke-SignTool (@('verify', '/pa', '/v') + $Files)
+}
+finally {
+  Remove-Item -Recurse -Force $tmp -ErrorAction SilentlyContinue
+}

@@ -13,9 +13,12 @@
     wix extension add -g WixToolset.Firewall.wixext/5.0.2
   TeamsLogic has no x86 build, so -Arch x86 stops at TeamsLogic.
 
-  The version defaults to the build date (2026.10.19), so a newer Setup replaces an older one. The
-  bundle isn't signed; a signed release needs `wix burn detach` / `reattach` around signing the
-  engine.
+  The version defaults to the build date (2026.10.19), so a newer Setup replaces an older one.
+
+  Signing: with the AZURE_* (or WINDOWS_CERTIFICATE) settings that sign.ps1 lists, each app's
+  packaging signs its exe and MSI, and this script signs the bundle's engine (`wix burn detach` /
+  `reattach`) and then the bundle. Without them everything is built unsigned, with warnings. Reused
+  MSIs (-SkipApps, -Only) keep whatever signature they were built with.
 
 .EXAMPLE
   pwsh installer/windows/build.ps1
@@ -75,4 +78,20 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "wix build failed with exit code $LASTEXITCODE" }
 } finally { Pop-Location }
 Remove-Item -Force ([IO.Path]::ChangeExtension($out, '.wixpdb')) -ErrorAction SilentlyContinue
+
+# Sign the Burn engine inside the bundle first (it's what runs and unpacks the MSIs), then the
+# bundle as a whole. sign.ps1 leaves both unsigned, with a warning, when no signing secrets are set.
+Write-Output "==> sign ($out)"
+$engine = Join-Path ([IO.Path]::GetTempPath()) "aegean-office-engine-$PID.exe"
+try {
+  wix burn detach $out -engine $engine
+  if ($LASTEXITCODE -ne 0) { throw "wix burn detach failed with exit code $LASTEXITCODE" }
+  pwsh -NoProfile -File (Join-Path $here 'sign.ps1') $engine
+  if ($LASTEXITCODE -ne 0) { throw "signing the bundle engine failed with exit code $LASTEXITCODE" }
+  wix burn reattach $out -engine $engine -o "$out.reattached"
+  if ($LASTEXITCODE -ne 0) { throw "wix burn reattach failed with exit code $LASTEXITCODE" }
+  Move-Item -Force "$out.reattached" $out
+  pwsh -NoProfile -File (Join-Path $here 'sign.ps1') $out
+  if ($LASTEXITCODE -ne 0) { throw "signing the bundle failed with exit code $LASTEXITCODE" }
+} finally { Remove-Item -Force $engine, "$out.reattached" -ErrorAction SilentlyContinue }
 Get-Item $out | Select-Object Name, Length

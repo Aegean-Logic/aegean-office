@@ -44,7 +44,8 @@ TeamsLogic is built for x64 and arm64 only, so `-Arch x86` stops at it.
 | `bundle.wxs` | The bundle: the four MSIs in a chain, the desktop shortcut choice, the fixed UpgradeCode |
 | `theme.xml`, `theme.wxl` | The Setup window (WiX standard bootstrapper application) and its strings |
 | `branding/` | The banner, app icons and Setup icon; `generate.ps1` renders them from `banner.svg` and `brand/` |
-| `build.ps1` | Builds the apps' MSIs and the bundle |
+| `build.ps1` | Builds the apps' MSIs and the bundle, and signs the bundle |
+| `sign.ps1` | Signs the bundle's engine and the bundle (a copy of the apps' `sign.ps1`, signing as Aegean Office Setup) |
 
 ## From the command line
 
@@ -54,4 +55,21 @@ AegeanOffice-2026.10.19-windows-x64-setup.exe /passive DesktopShortcuts=1
 
 `/quiet` installs with no window, `/uninstall` removes all four, and `/help` lists the rest.
 
-The Setup isn't signed yet, so Windows SmartScreen asks before running it.
+## Signing
+
+Aegean Logic signs with Azure Artifact Signing (account `aegeanlogic-signing`, certificate profile
+`AegeanPublic`). Set these before building, and every exe, MSI and the Setup come out signed by
+AEGEAN LOGIC LLP:
+
+| Variable | Value |
+|---|---|
+| `AZURE_TENANT_ID` | the Aegean Logic tenant's ID |
+| `AZURE_CLIENT_ID` | the application ID of the app registration `aegean-office-signing` |
+| `AZURE_CLIENT_SECRET` | that app registration's client secret (never commit it) |
+| `AZURE_SIGNING_ENDPOINT` | `https://neu.codesigning.azure.net/` |
+| `AZURE_SIGNING_ACCOUNT` | `aegeanlogic-signing` |
+| `AZURE_CERT_PROFILE` | `AegeanPublic` |
+
+Without them the build still works, unsigned, and Windows SmartScreen asks before running the
+Setup. `-SkipApps` and `-Only` reuse MSIs as they were built, so rebuild all four (no `-SkipApps`)
+for a fully signed release.
