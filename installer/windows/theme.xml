@@ -9,7 +9,8 @@
     <Font Id="3" Height="-13" Weight="600" Foreground="windowtext" Background="window">Segoe UI</Font>
     <Font Id="4" Height="-11" Weight="400" Foreground="graytext" Background="window">Segoe UI</Font>
 
-    <Window Width="560" Height="400" HexStyle="100a0000" FontId="0" Caption="#(loc.Caption)">
+    <!-- IconFile is the title bar and taskbar icon; the bundle's IconSourceFile only sets the exe's. -->
+    <Window Width="560" Height="400" HexStyle="100a0000" FontId="0" Caption="#(loc.Caption)" IconFile="aegean-office.ico">
         <ImageControl X="0" Y="0" Width="560" Height="92" ImageFile="banner.png" Visible="yes" />
 
         <Page Name="Help">

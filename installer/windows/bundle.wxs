@@ -32,6 +32,7 @@
                                               ThemeFile="theme.xml"
                                               LocalizationFile="theme.wxl"
                                               SuppressOptionsUI="yes" />
+      <Payload SourceFile="branding\aegean-office.ico" Name="aegean-office.ico" />
       <Payload SourceFile="branding\banner.png" Name="banner.png" />
       <Payload SourceFile="branding\gridlogic.png" Name="gridlogic.png" />
       <Payload SourceFile="branding\wordlogic.png" Name="wordlogic.png" />
